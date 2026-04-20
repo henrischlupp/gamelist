@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create account</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<main class="container">
+    <section class="card simple-form">
+        <h1>Create account</h1>
+        <form method="post" th:object="${registerForm}" th:action="@{/register}" class="stack">
+            <label>
+                Email
+                <input type="email" th:field="*{email}" required>
+                <span class="field-error" th:errors="*{email}"></span>
+            </label>
+            <label>
+                Username
+                <input type="text" th:field="*{username}" required>
+                <span class="field-error" th:errors="*{username}"></span>
+            </label>
+            <label>
+                Password
+                <input type="password" th:field="*{password}" required>
+                <span class="field-error" th:errors="*{password}"></span>
+            </label>
+            <label>
+                Confirm password
+                <input type="password" th:field="*{confirmPassword}" required>
+                <span class="field-error" th:errors="*{confirmPassword}"></span>
+            </label>
+            <button class="button primary" type="submit">Create account</button>
+        </form>
+        <p th:if="${error}" class="message error" th:text="${error}"></p>
+        <p><a th:href="@{/login}">Already have an account?</a></p>
+    </section>
+</main>
+</body>
+</html>

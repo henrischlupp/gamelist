@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<main class="container">
+    <section class="card simple-form">
+        <h1>Sign in</h1>
+        <p th:if="${param.error}" class="message error">Invalid username or password.</p>
+        <p th:if="${successMessage}" class="message success" th:text="${successMessage}"></p>
+
+        <form method="post" th:action="@{/login}" class="stack">
+            <label>
+                Username
+                <input type="text" name="username" required>
+            </label>
+            <label>
+                Password
+                <input type="password" name="password" required>
+            </label>
+            <button class="button primary" type="submit">Sign in</button>
+        </form>
+        <p><a th:href="@{/forgotpassword}">Forgot password?</a></p>
+        <p><a th:href="@{/register}">Create a new account</a></p>
+    </section>
+</main>
+</body>
+</html>

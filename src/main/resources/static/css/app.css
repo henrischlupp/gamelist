@@ -1,0 +1,61 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.stack > * + * {
+    margin-top: 12px;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    max-width: 400px;
+    padding: 8px;
+    margin-top: 4px;
+    margin-bottom: 10px;
+}
+
+.message {
+    margin: 10px 0;
+}
+
+.success {
+    color: green;
+}
+
+.error,
+.field-error {
+    color: red;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th,
+td {
+    border: 1px solid #999;
+    padding: 8px;
+    text-align: left;
+}
+
+.card {
+    padding: 15px 0;
+}
+
+button {
+    padding: 6px 12px;
+}
+
+.simple-form {
+    max-width: 500px;
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<main class="container stack">
+    <h1>Games</h1>
+    <p>
+        <a th:href="@{/addgame}">Add game</a> |
+        <a th:href="@{/home}">Home</a>
+    </p>
+
+    <section class="card">
+        <table>
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Developer</th>
+                <th>Platform</th>
+                <th>Status</th>
+                <th>Release date</th>
+                <th>Notes</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="game : ${games}">
+                <td th:text="${game.title}">Title</td>
+                <td th:text="${game.developer}">Developer</td>
+                <td th:text="${game.platform}">Platform</td>
+                <td th:text="${game.status != null ? game.status.statusName : '-'}">Status</td>
+                <td th:text="${game.releaseDate != null ? #temporals.format(game.releaseDate, 'dd.MM.yyyy') : '-'}">-</td>
+                <td th:text="${game.notes}">Notes</td>
+                <td>
+                    <a th:href="@{/deletegame/{id}(id=${game.id})}">Delete</a>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(games)}">
+                <td colspan="7">No games added yet.</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+</body>
+</html>

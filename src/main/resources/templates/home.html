@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moviehub</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<main class="container">
+    <h1>GameList</h1>
+    <p>This is the main page after login.</p>
+    <p><a th:href="@{/games}">Show games</a></p>
+    <p><a th:href="@{/addgame}">Add game</a></p>
+    <form method="post" th:action="@{/logout}">
+        <button type="submit">Logout</button>
+    </form>
+</main>
+</body>
+</html>
