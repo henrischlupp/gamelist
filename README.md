@@ -1,68 +1,92 @@
-
 # GameList
 
-GameList is a simple Spring Boot and Thymeleaf web application for managing a personal video game collection.
+GameList is a Spring Boot and Thymeleaf web application for managing a personal video game library. Users can register, log in, add games, view their own game list, delete games, and reset their password by email.
+
+**The whole README has been written by AI.**
+
+## Live application
+
+The application is currently hosted at:
+
+[https://softala.haaga-helia.fi:8081/login](https://softala.haaga-helia.fi:8081/login)
 
 ## Features
 
-- Public landing page that shows recently added games without requiring login
-- Private library for authenticated users
-- CRUD operations for game entries
-- Status tracking with `PLAYABLE`, `UNFINISHED`, and `COMPLETED`
-- Bean Validation for registration and game forms
-- Spring Security form login
+- User registration
+- User login with Spring Security
+- Separate game library for each registered user
+- Add game to your own library
+- View your own games
+- Delete your own games
+- Status selection for each game
 - Password reset by email
-- REST endpoint at `/api/games`
-- PostgreSQL-ready configuration with environment variables
-- Local development support with H2 in-memory database
 
 ## Tech stack
 
-- Java 21
+- Java 17
 - Spring Boot
 - Spring MVC
 - Thymeleaf
 - Spring Data JPA
 - Spring Security
 - Bean Validation
-- PostgreSQL
-- H2 for local development
+- H2 database
 
-## Data model
+## Current data model
 
-The application uses at least two related database tables:
+The main tables/entities in the project are:
 
-- `app_users` stores registered users
-- `games` stores game entries and links each game to its owner
+- `User`
+- `Game`
+- `Status`
 
-This gives the project a simple one-to-many relationship for the course requirements.
+Relationship used in the app:
 
-## Running locally
+- one user can have many games
+- each game has one status
 
-1. Install Java 21 and Maven.
-2. Run the app:
+## How the app works
+
+- After login, the user is redirected to `/home`
+- The user can open `/games` to see only their own games
+- `/addgame` opens the form for adding a new game
+- `/savegame` saves the submitted game for the logged-in user
+- `/deletegame/{id}` deletes a game only if it belongs to the logged-in user
+- `/register` is used to create a new account
+- `/forgotpassword` and `/resetpassword` are used for password reset
+
+## Demo users
+
+The application seeds two users at startup:
+
+- Username: `user`
+- Role: `USER`
+
+- Username: `admin`
+- Role: `ADMIN`
+
+The demo data also adds example games to the `user` account.
+
+## Local development
+
+Requirements:
+
+- Java 17
+- Maven
+
+Run locally:
 
 ```bash
 mvn spring-boot:run
 ```
 
-3. Open `http://localhost:8080`
+The application uses H2 in-memory database in the current setup.
 
-Demo login:
+## Email reset configuration
 
-- Username: `demo`
-- Password: `password`
+Password reset email uses SMTP settings from environment variables in `application.properties`.
 
-## PostgreSQL and cloud deployment
+Important variables:
 
-For cloud deployment later, configure these environment variables:
-
-- `JDBC_DATABASE_URL`
-- `JDBC_DATABASE_USERNAME`
-- `JDBC_DATABASE_PASSWORD`
-- `JDBC_DATABASE_DRIVER=org.postgresql.Driver`
 - `MAIL_USERNAME`
-- `MAIL_APP_PASSWORD`
-- `APP_BASE_URL`
-
-The app defaults to H2 locally, but it can switch to PostgreSQL automatically when those values are provided.
+- `MAIL_PASSWORD`
