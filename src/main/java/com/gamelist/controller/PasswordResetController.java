@@ -127,7 +127,7 @@ public class PasswordResetController {
         appUser.setResetToken(null);
         urepository.save(appUser);
 
-        return "redirect:/login";
+        return "redirect:/login?resetSuccess";
     }
 
     // Send password reset email 
